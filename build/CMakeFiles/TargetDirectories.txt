@@ -1,0 +1,3 @@
+/Users/marcelopiano/repos/idj/build/CMakeFiles/my_game.dir
+/Users/marcelopiano/repos/idj/build/CMakeFiles/edit_cache.dir
+/Users/marcelopiano/repos/idj/build/CMakeFiles/rebuild_cache.dir
