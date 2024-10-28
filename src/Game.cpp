@@ -102,7 +102,7 @@ Game &Game::GetInstance()
         return *instance;
     }
 
-    Game *game = new Game("Teste", 800, 600);
+    Game *game = new Game("200049496", 1200, 900);
     instance = game;
 
     return *game;
