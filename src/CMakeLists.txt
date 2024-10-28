@@ -8,7 +8,7 @@ find_package(SDL2_mixer REQUIRED)
 find_package(SDL2_ttf REQUIRED)
 
 # Add your source files
-set(SOURCES main.cpp Game.cpp State.cpp Sprite.cpp) # You can add more source files here if needed
+set(SOURCES main.cpp Game.cpp State.cpp Sprite.cpp Music.cpp) # You can add more source files here if needed
 
 # Create the executable
 add_executable(my_game ${SOURCES})
