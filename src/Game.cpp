@@ -11,6 +11,9 @@ SDL_Renderer *Game::renderer = nullptr;
 
 Game::Game(string title, int width, int height)
 {
+    cout << "Game::Game - Instanciando Game" << endl;
+
+    instance = this;
 
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER) != 0)
     {
@@ -45,7 +48,7 @@ Game::Game(string title, int width, int height)
     SDL_Window *window_created = SDL_CreateWindow("Hello SDL2",
                                                   SDL_WINDOWPOS_CENTERED,
                                                   SDL_WINDOWPOS_CENTERED,
-                                                  640, 480, SDL_WINDOW_SHOWN);
+                                                  width, height, SDL_WINDOW_SHOWN);
     if (window_created == nullptr)
     {
         printf("SDL_CreateWindow Error: %s\n", SDL_GetError());
@@ -54,10 +57,10 @@ Game::Game(string title, int width, int height)
     window = window_created;
 
     // Create a renderer
-    SDL_Renderer *renderer_created = SDL_CreateRenderer(window_created, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+    SDL_Renderer *renderer_created = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     if (renderer_created == nullptr)
     {
-        SDL_DestroyWindow(window_created);
+        SDL_DestroyWindow(window);
         printf("SDL_CreateRenderer Error: %s\n", SDL_GetError());
         SDL_Quit();
     }
@@ -66,6 +69,9 @@ Game::Game(string title, int width, int height)
     // Instanciar o state
     State *state_created = new State();
     state = state_created;
+
+    cout << "Game::Game - Game instanciado!" << endl; 
+
 };
 
 SDL_Renderer *Game::GetRenderer()
@@ -92,7 +98,7 @@ Game &Game::GetInstance()
 {
     if (instance != nullptr)
     {
-        cout << "já existe instância" << endl;
+        cout << "Game::GetInstance - já existe instância" << endl;
         return *instance;
     }
 
@@ -104,12 +110,16 @@ Game &Game::GetInstance()
 
 void Game::Run()
 {
+    
     while (state->QuitRequested() == false)
     {
         state->Update(0.0);
+        
         state->Render();
 
+        // força o renderizador passado como argumento a atualizar a tela com as últimas renderizações feitas
         SDL_RenderPresent(renderer);
+
         SDL_Delay(33);
     }
 }

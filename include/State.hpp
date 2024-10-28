@@ -1,4 +1,5 @@
 #pragma once
+#include "../include/Sprite.hpp"
 #include <iostream>
 #include <string>
 #include "SDL.h"
@@ -6,9 +7,9 @@
 class State
 {
 private:
-    // Sprite bg;
-    // Music music
+    Sprite bg;
     bool quitRequested;
+    // Music music;
 
 public:
     State();

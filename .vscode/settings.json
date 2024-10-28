@@ -59,6 +59,7 @@
   "files.associations": {
     "iostream": "cpp",
     "stdexcept": "cpp",
-    "locale": "cpp"
+    "locale": "cpp",
+    "ostream": "cpp"
   }
 }
