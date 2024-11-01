@@ -9,7 +9,7 @@ Sprite::Sprite()
     texture = nullptr;
 };
 
-Sprite::Sprite(string file)
+Sprite::Sprite(string file, int frameCountW = 1, int frameCountH = 1)
 {
 
     texture = nullptr;
@@ -55,8 +55,7 @@ void Sprite::Open(string file)
     cout << "Sprite::Open - Textura criada" << endl;
 };
 
-
-void Sprite::Render(int x, int y)
+void Sprite::Render(int x, int y, int w, int h)
 {
     cout << "Sprite::Render - Rendenizando Sprite" << endl;
 
@@ -81,12 +80,12 @@ void Sprite::SetClip(int x, int y, int w, int h)
 
 int Sprite::GetHeight()
 {
-    return clipRect.h;
+    return height/frameCountH;
 };
 
 int Sprite::GetWidth()
 {
-    return clipRect.w;
+    return width/frameCountW;
 };
 
 bool Sprite::IsOpen()
@@ -101,3 +100,14 @@ Sprite::~Sprite()
         SDL_DestroyTexture(texture);
     };
 };
+
+void Sprite::setFrame(int frame)
+{
+    SetClip((frame % frameCountW) * (width/frameCountW), (frame / frameCountW) * height/frameCountH, (width / frameCountW), (height / frameCountH));
+};
+
+void Sprite::setFrameCount(int frameCountW, int frameCountH)
+{
+    this->frameCountW = frameCountW;
+    this->frameCountH = frameCountH;
+}
